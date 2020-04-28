@@ -1,6 +1,9 @@
 <script>
     import Chart from 'svelte-frappe-charts';
 
+    // Constants
+    let countries = [ ["BE", "Belgium"], ["DE", "Germany"], ["FI", "Finland"], ["IT", "Italy"], ["LU", "Luxembourg"], ["NL", "Netherlands"], ["PL", "Poland"], ["UK", "United Kingdom"] ];
+
     // Functions
     function buildData(age, r_factor) {
         
@@ -19,6 +22,7 @@
     // Parameters
     let age = 25;
     let r_factor = 1.0;
+    let country = "UK";
 
     let iso = 0;
 
@@ -30,7 +34,7 @@
 
 <form>
     <label>What is your age?</label>
-    <input bind:value={age} placeholder="Enter your age"/>
+    <input bind:value={age} />
 
     <!-- 
     <label>What state do you live in?</label>
@@ -42,7 +46,14 @@
     -->
 
     <label>What do you think the R-factor is in your area?</label>
-    <input bind:value={r_factor} placeholder="1.0" type="number" />
+    <input bind:value={r_factor} type="number" />
+
+    <label>What country do you think most closely reflects contact patterns in your area?</label>
+    <select bind:value={country}>
+        {#each countries as c}
+        <option value={c[0]}>{c[1]}</option>
+        {/each}
+    </select>
 </form>
 
 <Chart data={data} type="percentage" />

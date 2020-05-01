@@ -360,6 +360,17 @@ var app = (function () {
         else
             dispatch_dev("SvelteDOMSetAttribute", { node, attribute, value });
     }
+    function prop_dev(node, property, value) {
+        node[property] = value;
+        dispatch_dev("SvelteDOMSetProperty", { node, property, value });
+    }
+    function set_data_dev(text, data) {
+        data = '' + data;
+        if (text.data === data)
+            return;
+        dispatch_dev("SvelteDOMSetData", { node: text, data });
+        text.data = data;
+    }
     function validate_each_argument(arg) {
         if (typeof arg !== 'string' && !(arg && typeof arg === 'object' && 'length' in arg)) {
             let msg = '{#each} only iterates over array-like objects.';
@@ -709,20 +720,26 @@ var app = (function () {
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[18] = list[i];
+    	child_ctx[21] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[21] = list[i];
+    	child_ctx[24] = list[i];
     	return child_ctx;
     }
 
-    // (144:8) {#each COUNTRIES as c}
-    function create_each_block_1(ctx) {
+    function get_each_context_2(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[27] = list[i];
+    	return child_ctx;
+    }
+
+    // (146:8) {#each TEST_DATA as t}
+    function create_each_block_2(ctx) {
     	let option;
-    	let t_value = /*c*/ ctx[21][1] + "";
+    	let t_value = /*t*/ ctx[27]["state"] + "";
     	let t;
     	let option_value_value;
 
@@ -730,9 +747,53 @@ var app = (function () {
     		c: function create() {
     			option = element("option");
     			t = text(t_value);
-    			option.__value = option_value_value = /*c*/ ctx[21][0];
+    			option.__value = option_value_value = /*t*/ ctx[27]["state"];
     			option.value = option.__value;
-    			add_location(option, file$1, 144, 8, 3927);
+    			add_location(option, file$1, 146, 12, 4084);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, option, anchor);
+    			append_dev(option, t);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*TEST_DATA*/ 1 && t_value !== (t_value = /*t*/ ctx[27]["state"] + "")) set_data_dev(t, t_value);
+
+    			if (dirty & /*TEST_DATA*/ 1 && option_value_value !== (option_value_value = /*t*/ ctx[27]["state"])) {
+    				prop_dev(option, "__value", option_value_value);
+    			}
+
+    			option.value = option.__value;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(option);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block_2.name,
+    		type: "each",
+    		source: "(146:8) {#each TEST_DATA as t}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (156:8) {#each COUNTRIES as c}
+    function create_each_block_1(ctx) {
+    	let option;
+    	let t_value = /*c*/ ctx[24][1] + "";
+    	let t;
+    	let option_value_value;
+
+    	const block = {
+    		c: function create() {
+    			option = element("option");
+    			t = text(t_value);
+    			option.__value = option_value_value = /*c*/ ctx[24][0];
+    			option.value = option.__value;
+    			add_location(option, file$1, 156, 8, 4454);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
@@ -748,20 +809,20 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(144:8) {#each COUNTRIES as c}",
+    		source: "(156:8) {#each COUNTRIES as c}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (151:4) {#each PLACES as p}
+    // (163:4) {#each PLACES as p}
     function create_each_block(ctx) {
     	let label;
     	let input;
     	let input_value_value;
     	let t0;
-    	let t1_value = /*p*/ ctx[18] + "";
+    	let t1_value = /*p*/ ctx[21] + "";
     	let t1;
     	let t2;
     	let dispose;
@@ -774,30 +835,30 @@ var app = (function () {
     			t1 = text(t1_value);
     			t2 = space();
     			attr_dev(input, "type", "checkbox");
-    			input.__value = input_value_value = /*p*/ ctx[18];
+    			input.__value = input_value_value = /*p*/ ctx[21];
     			input.value = input.__value;
-    			/*$$binding_groups*/ ctx[17][0].push(input);
-    			add_location(input, file$1, 152, 12, 4110);
-    			add_location(label, file$1, 151, 8, 4090);
+    			/*$$binding_groups*/ ctx[20][0].push(input);
+    			add_location(input, file$1, 164, 12, 4637);
+    			add_location(label, file$1, 163, 8, 4617);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, label, anchor);
     			append_dev(label, input);
-    			input.checked = ~/*places*/ ctx[3].indexOf(input.__value);
+    			input.checked = ~/*places*/ ctx[5].indexOf(input.__value);
     			append_dev(label, t0);
     			append_dev(label, t1);
     			append_dev(label, t2);
     			if (remount) dispose();
-    			dispose = listen_dev(input, "change", /*input_change_handler*/ ctx[16]);
+    			dispose = listen_dev(input, "change", /*input_change_handler*/ ctx[19]);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*places*/ 8) {
-    				input.checked = ~/*places*/ ctx[3].indexOf(input.__value);
+    			if (dirty & /*places*/ 32) {
+    				input.checked = ~/*places*/ ctx[5].indexOf(input.__value);
     			}
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(label);
-    			/*$$binding_groups*/ ctx[17][0].splice(/*$$binding_groups*/ ctx[17][0].indexOf(input), 1);
+    			/*$$binding_groups*/ ctx[20][0].splice(/*$$binding_groups*/ ctx[20][0].indexOf(input), 1);
     			dispose();
     		}
     	};
@@ -806,7 +867,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(151:4) {#each PLACES as p}",
+    		source: "(163:4) {#each PLACES as p}",
     		ctx
     	});
 
@@ -823,18 +884,36 @@ var app = (function () {
     	let t4;
     	let label1;
     	let t6;
-    	let input1;
+    	let select0;
     	let t7;
     	let label2;
     	let t9;
-    	let select;
+    	let input1;
     	let t10;
     	let label3;
     	let t12;
+    	let select1;
     	let t13;
+    	let label4;
+    	let t15;
+    	let t16;
+    	let h2;
+    	let t17;
+    	let t18_value = /*data*/ ctx[6][0] + "";
+    	let t18;
+    	let t19;
+    	let t20;
     	let current;
     	let dispose;
-    	let each_value_1 = /*COUNTRIES*/ ctx[5];
+    	let each_value_2 = /*TEST_DATA*/ ctx[0];
+    	validate_each_argument(each_value_2);
+    	let each_blocks_2 = [];
+
+    	for (let i = 0; i < each_value_2.length; i += 1) {
+    		each_blocks_2[i] = create_each_block_2(get_each_context_2(ctx, each_value_2, i));
+    	}
+
+    	let each_value_1 = /*COUNTRIES*/ ctx[7];
     	validate_each_argument(each_value_1);
     	let each_blocks_1 = [];
 
@@ -842,7 +921,7 @@ var app = (function () {
     		each_blocks_1[i] = create_each_block_1(get_each_context_1(ctx, each_value_1, i));
     	}
 
-    	let each_value = /*PLACES*/ ctx[6];
+    	let each_value = /*PLACES*/ ctx[8];
     	validate_each_argument(each_value);
     	let each_blocks = [];
 
@@ -852,7 +931,7 @@ var app = (function () {
 
     	const chart = new Base({
     			props: {
-    				data: /*data*/ ctx[4],
+    				data: /*data*/ ctx[6][1],
     				type: "percentage"
     			},
     			$$inline: true
@@ -870,41 +949,60 @@ var app = (function () {
     			input0 = element("input");
     			t4 = space();
     			label1 = element("label");
-    			label1.textContent = "What do you think the R-factor is in your area?";
+    			label1.textContent = "What state do you live in?";
     			t6 = space();
-    			input1 = element("input");
+    			select0 = element("select");
+
+    			for (let i = 0; i < each_blocks_2.length; i += 1) {
+    				each_blocks_2[i].c();
+    			}
+
     			t7 = space();
     			label2 = element("label");
-    			label2.textContent = "What country do you think most closely reflects contact patterns in your area?";
+    			label2.textContent = "What do you think the R-factor is in your state?";
     			t9 = space();
-    			select = element("select");
+    			input1 = element("input");
+    			t10 = space();
+    			label3 = element("label");
+    			label3.textContent = "What country do you think most closely reflects contact patterns in your area?";
+    			t12 = space();
+    			select1 = element("select");
 
     			for (let i = 0; i < each_blocks_1.length; i += 1) {
     				each_blocks_1[i].c();
     			}
 
-    			t10 = space();
-    			label3 = element("label");
-    			label3.textContent = "Which of these locations do you visit?";
-    			t12 = space();
+    			t13 = space();
+    			label4 = element("label");
+    			label4.textContent = "Which of these locations do you visit?";
+    			t15 = space();
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].c();
     			}
 
-    			t13 = space();
+    			t16 = space();
+    			h2 = element("h2");
+    			t17 = text("Your chance of getting infected: ");
+    			t18 = text(t18_value);
+    			t19 = text("%");
+    			t20 = space();
     			create_component(chart.$$.fragment);
-    			add_location(h1, file$1, 123, 0, 3387);
-    			add_location(label0, file$1, 126, 4, 3429);
-    			add_location(input0, file$1, 127, 4, 3466);
-    			add_location(label1, file$1, 138, 4, 3642);
+    			add_location(h1, file$1, 137, 0, 3855);
+    			add_location(label0, file$1, 140, 4, 3897);
+    			add_location(input0, file$1, 141, 4, 3934);
+    			add_location(label1, file$1, 143, 4, 3966);
+    			if (/*state*/ ctx[4] === void 0) add_render_callback(() => /*select0_change_handler*/ ctx[16].call(select0));
+    			add_location(select0, file$1, 144, 4, 4012);
+    			add_location(label2, file$1, 150, 4, 4168);
     			attr_dev(input1, "type", "number");
-    			add_location(input1, file$1, 139, 4, 3709);
-    			add_location(label2, file$1, 141, 4, 3760);
-    			if (/*country*/ ctx[2] === void 0) add_render_callback(() => /*select_change_handler*/ ctx[15].call(select));
-    			add_location(select, file$1, 142, 4, 3858);
-    			add_location(label3, file$1, 148, 4, 3999);
-    			add_location(form, file$1, 125, 0, 3418);
+    			add_location(input1, file$1, 151, 4, 4236);
+    			add_location(label3, file$1, 153, 4, 4287);
+    			if (/*country*/ ctx[3] === void 0) add_render_callback(() => /*select1_change_handler*/ ctx[18].call(select1));
+    			add_location(select1, file$1, 154, 4, 4385);
+    			add_location(label4, file$1, 160, 4, 4526);
+    			add_location(form, file$1, 139, 0, 3886);
+    			add_location(h2, file$1, 170, 0, 4743);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -916,52 +1014,96 @@ var app = (function () {
     			append_dev(form, label0);
     			append_dev(form, t3);
     			append_dev(form, input0);
-    			set_input_value(input0, /*age*/ ctx[0]);
+    			set_input_value(input0, /*age*/ ctx[1]);
     			append_dev(form, t4);
     			append_dev(form, label1);
     			append_dev(form, t6);
-    			append_dev(form, input1);
-    			set_input_value(input1, /*r_factor*/ ctx[1]);
+    			append_dev(form, select0);
+
+    			for (let i = 0; i < each_blocks_2.length; i += 1) {
+    				each_blocks_2[i].m(select0, null);
+    			}
+
+    			select_option(select0, /*state*/ ctx[4]);
     			append_dev(form, t7);
     			append_dev(form, label2);
     			append_dev(form, t9);
-    			append_dev(form, select);
-
-    			for (let i = 0; i < each_blocks_1.length; i += 1) {
-    				each_blocks_1[i].m(select, null);
-    			}
-
-    			select_option(select, /*country*/ ctx[2]);
+    			append_dev(form, input1);
+    			set_input_value(input1, /*r_factor*/ ctx[2]);
     			append_dev(form, t10);
     			append_dev(form, label3);
     			append_dev(form, t12);
+    			append_dev(form, select1);
+
+    			for (let i = 0; i < each_blocks_1.length; i += 1) {
+    				each_blocks_1[i].m(select1, null);
+    			}
+
+    			select_option(select1, /*country*/ ctx[3]);
+    			append_dev(form, t13);
+    			append_dev(form, label4);
+    			append_dev(form, t15);
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].m(form, null);
     			}
 
-    			insert_dev(target, t13, anchor);
+    			insert_dev(target, t16, anchor);
+    			insert_dev(target, h2, anchor);
+    			append_dev(h2, t17);
+    			append_dev(h2, t18);
+    			append_dev(h2, t19);
+    			insert_dev(target, t20, anchor);
     			mount_component(chart, target, anchor);
     			current = true;
     			if (remount) run_all(dispose);
 
     			dispose = [
-    				listen_dev(input0, "input", /*input0_input_handler*/ ctx[13]),
-    				listen_dev(input1, "input", /*input1_input_handler*/ ctx[14]),
-    				listen_dev(select, "change", /*select_change_handler*/ ctx[15])
+    				listen_dev(input0, "input", /*input0_input_handler*/ ctx[15]),
+    				listen_dev(select0, "change", /*select0_change_handler*/ ctx[16]),
+    				listen_dev(input1, "input", /*input1_input_handler*/ ctx[17]),
+    				listen_dev(select1, "change", /*select1_change_handler*/ ctx[18])
     			];
     		},
     		p: function update(ctx, [dirty]) {
-    			if (dirty & /*age*/ 1 && input0.value !== /*age*/ ctx[0]) {
-    				set_input_value(input0, /*age*/ ctx[0]);
+    			if (dirty & /*age*/ 2 && input0.value !== /*age*/ ctx[1]) {
+    				set_input_value(input0, /*age*/ ctx[1]);
     			}
 
-    			if (dirty & /*r_factor*/ 2 && to_number(input1.value) !== /*r_factor*/ ctx[1]) {
-    				set_input_value(input1, /*r_factor*/ ctx[1]);
+    			if (dirty & /*TEST_DATA*/ 1) {
+    				each_value_2 = /*TEST_DATA*/ ctx[0];
+    				validate_each_argument(each_value_2);
+    				let i;
+
+    				for (i = 0; i < each_value_2.length; i += 1) {
+    					const child_ctx = get_each_context_2(ctx, each_value_2, i);
+
+    					if (each_blocks_2[i]) {
+    						each_blocks_2[i].p(child_ctx, dirty);
+    					} else {
+    						each_blocks_2[i] = create_each_block_2(child_ctx);
+    						each_blocks_2[i].c();
+    						each_blocks_2[i].m(select0, null);
+    					}
+    				}
+
+    				for (; i < each_blocks_2.length; i += 1) {
+    					each_blocks_2[i].d(1);
+    				}
+
+    				each_blocks_2.length = each_value_2.length;
     			}
 
-    			if (dirty & /*COUNTRIES*/ 32) {
-    				each_value_1 = /*COUNTRIES*/ ctx[5];
+    			if (dirty & /*state*/ 16) {
+    				select_option(select0, /*state*/ ctx[4]);
+    			}
+
+    			if (dirty & /*r_factor*/ 4 && to_number(input1.value) !== /*r_factor*/ ctx[2]) {
+    				set_input_value(input1, /*r_factor*/ ctx[2]);
+    			}
+
+    			if (dirty & /*COUNTRIES*/ 128) {
+    				each_value_1 = /*COUNTRIES*/ ctx[7];
     				validate_each_argument(each_value_1);
     				let i;
 
@@ -973,7 +1115,7 @@ var app = (function () {
     					} else {
     						each_blocks_1[i] = create_each_block_1(child_ctx);
     						each_blocks_1[i].c();
-    						each_blocks_1[i].m(select, null);
+    						each_blocks_1[i].m(select1, null);
     					}
     				}
 
@@ -984,12 +1126,12 @@ var app = (function () {
     				each_blocks_1.length = each_value_1.length;
     			}
 
-    			if (dirty & /*country*/ 4) {
-    				select_option(select, /*country*/ ctx[2]);
+    			if (dirty & /*country*/ 8) {
+    				select_option(select1, /*country*/ ctx[3]);
     			}
 
-    			if (dirty & /*PLACES, places*/ 72) {
-    				each_value = /*PLACES*/ ctx[6];
+    			if (dirty & /*PLACES, places*/ 288) {
+    				each_value = /*PLACES*/ ctx[8];
     				validate_each_argument(each_value);
     				let i;
 
@@ -1012,8 +1154,9 @@ var app = (function () {
     				each_blocks.length = each_value.length;
     			}
 
+    			if ((!current || dirty & /*data*/ 64) && t18_value !== (t18_value = /*data*/ ctx[6][0] + "")) set_data_dev(t18, t18_value);
     			const chart_changes = {};
-    			if (dirty & /*data*/ 16) chart_changes.data = /*data*/ ctx[4];
+    			if (dirty & /*data*/ 64) chart_changes.data = /*data*/ ctx[6][1];
     			chart.$set(chart_changes);
     		},
     		i: function intro(local) {
@@ -1029,9 +1172,12 @@ var app = (function () {
     			if (detaching) detach_dev(h1);
     			if (detaching) detach_dev(t1);
     			if (detaching) detach_dev(form);
+    			destroy_each(each_blocks_2, detaching);
     			destroy_each(each_blocks_1, detaching);
     			destroy_each(each_blocks, detaching);
-    			if (detaching) detach_dev(t13);
+    			if (detaching) detach_dev(t16);
+    			if (detaching) detach_dev(h2);
+    			if (detaching) detach_dev(t20);
     			destroy_component(chart, detaching);
     			run_all(dispose);
     		}
@@ -1073,6 +1219,7 @@ var app = (function () {
 
     	let AGE_BUCKETS = [[0, 10], [11, 20], [21, 30], [31, 40], [41, 50], [51, 60], [61, 70], [80, 120]];
     	let NAN_DATASET = { labels: [], datasets: [] };
+    	let TEST_DATA = [];
     	var age_sorted_contacts = {};
 
     	Papa.parse("data/2008_Mossong_POLYMOD_COMPUTED_contacts.csv", {
@@ -1092,8 +1239,12 @@ var app = (function () {
     				age_sorted_contacts[a].push(result);
     			}
 
-    			$$invalidate(4, data = buildData(age, r_factor, country, places));
+    			$$invalidate(6, data = buildData(age, r_factor, state, country, places));
     		}
+    	});
+
+    	window.$.getJSON("https://covidtracking.com/api/v1/states/current.json", function (data) {
+    		$$invalidate(0, TEST_DATA = data);
     	});
 
     	// Functions
@@ -1107,8 +1258,10 @@ var app = (function () {
     		}
     	}
 
-    	function buildData(age, r_factor, country, places) {
+    	function buildData(age, r_factor, state, country, places) {
     		var relevant_results = age_sorted_contacts[getAgeBucket(age)];
+    		var test_results = TEST_DATA.filter(x => x["state"] == state)[0];
+    		console.log(test_results);
 
     		let trueFalseFunc = function (v) {
     			if (v == "True") {
@@ -1159,15 +1312,21 @@ var app = (function () {
     			}
     		}
 
-    		return {
-    			labels: Object.keys(ret),
-    			datasets: [
-    				{
-    					name: "Results",
-    					values: Object.values(ret)
-    				}
-    			]
-    		};
+    		// Compute the chance
+    		var chance = Math.floor(test_results["positive"] / test_results["totalTestResults"] * 10000) / 100;
+
+    		return [
+    			chance,
+    			{
+    				labels: Object.keys(ret),
+    				datasets: [
+    					{
+    						name: "Results",
+    						values: Object.values(ret)
+    					}
+    				]
+    			}
+    		];
     	}
 
     	// Parameters
@@ -1175,6 +1334,7 @@ var app = (function () {
 
     	var r_factor = 1;
     	var country = "UK";
+    	var state = "CA";
     	var places = PLACES.slice();
     	const writable_props = [];
 
@@ -1188,23 +1348,29 @@ var app = (function () {
 
     	function input0_input_handler() {
     		age = this.value;
-    		$$invalidate(0, age);
+    		$$invalidate(1, age);
+    	}
+
+    	function select0_change_handler() {
+    		state = select_value(this);
+    		$$invalidate(4, state);
+    		$$invalidate(0, TEST_DATA);
     	}
 
     	function input1_input_handler() {
     		r_factor = to_number(this.value);
-    		$$invalidate(1, r_factor);
+    		$$invalidate(2, r_factor);
     	}
 
-    	function select_change_handler() {
+    	function select1_change_handler() {
     		country = select_value(this);
-    		$$invalidate(2, country);
-    		$$invalidate(5, COUNTRIES);
+    		$$invalidate(3, country);
+    		$$invalidate(7, COUNTRIES);
     	}
 
     	function input_change_handler() {
     		places = get_binding_group_value($$binding_groups[0]);
-    		$$invalidate(3, places);
+    		$$invalidate(5, places);
     	}
 
     	$$self.$capture_state = () => ({
@@ -1214,28 +1380,32 @@ var app = (function () {
     		PLACE_MAPPINGS,
     		AGE_BUCKETS,
     		NAN_DATASET,
+    		TEST_DATA,
     		age_sorted_contacts,
     		getAgeBucket,
     		buildData,
     		age,
     		r_factor,
     		country,
+    		state,
     		places,
     		data
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ("COUNTRIES" in $$props) $$invalidate(5, COUNTRIES = $$props.COUNTRIES);
-    		if ("PLACES" in $$props) $$invalidate(6, PLACES = $$props.PLACES);
+    		if ("COUNTRIES" in $$props) $$invalidate(7, COUNTRIES = $$props.COUNTRIES);
+    		if ("PLACES" in $$props) $$invalidate(8, PLACES = $$props.PLACES);
     		if ("PLACE_MAPPINGS" in $$props) PLACE_MAPPINGS = $$props.PLACE_MAPPINGS;
     		if ("AGE_BUCKETS" in $$props) AGE_BUCKETS = $$props.AGE_BUCKETS;
     		if ("NAN_DATASET" in $$props) NAN_DATASET = $$props.NAN_DATASET;
+    		if ("TEST_DATA" in $$props) $$invalidate(0, TEST_DATA = $$props.TEST_DATA);
     		if ("age_sorted_contacts" in $$props) age_sorted_contacts = $$props.age_sorted_contacts;
-    		if ("age" in $$props) $$invalidate(0, age = $$props.age);
-    		if ("r_factor" in $$props) $$invalidate(1, r_factor = $$props.r_factor);
-    		if ("country" in $$props) $$invalidate(2, country = $$props.country);
-    		if ("places" in $$props) $$invalidate(3, places = $$props.places);
-    		if ("data" in $$props) $$invalidate(4, data = $$props.data);
+    		if ("age" in $$props) $$invalidate(1, age = $$props.age);
+    		if ("r_factor" in $$props) $$invalidate(2, r_factor = $$props.r_factor);
+    		if ("country" in $$props) $$invalidate(3, country = $$props.country);
+    		if ("state" in $$props) $$invalidate(4, state = $$props.state);
+    		if ("places" in $$props) $$invalidate(5, places = $$props.places);
+    		if ("data" in $$props) $$invalidate(6, data = $$props.data);
     	};
 
     	let data;
@@ -1245,15 +1415,17 @@ var app = (function () {
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*age, r_factor, country, places*/ 15) {
-    			 $$invalidate(4, data = buildData(age, r_factor, country, places));
+    		if ($$self.$$.dirty & /*age, r_factor, state, country, places*/ 62) {
+    			 $$invalidate(6, data = buildData(age, r_factor, state, country, places));
     		}
     	};
 
     	return [
+    		TEST_DATA,
     		age,
     		r_factor,
     		country,
+    		state,
     		places,
     		data,
     		COUNTRIES,
@@ -1265,8 +1437,9 @@ var app = (function () {
     		getAgeBucket,
     		buildData,
     		input0_input_handler,
+    		select0_change_handler,
     		input1_input_handler,
-    		select_change_handler,
+    		select1_change_handler,
     		input_change_handler,
     		$$binding_groups
     	];

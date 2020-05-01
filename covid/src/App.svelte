@@ -17,6 +17,7 @@
             labels: [],
             datasets: []
     };
+    let TEST_DATA = [];
 
     var age_sorted_contacts = {};
 
@@ -35,10 +36,14 @@
                     age_sorted_contacts[a].push(result);
                 }
 
-                data = buildData(age, r_factor, country, places); 
+                data = buildData(age, r_factor, state, country, places);
             }
         }
-        )
+    )
+
+    window.$.getJSON("https://covidtracking.com/api/v1/states/current.json", function(data) {
+        TEST_DATA = data;
+    });
 
 
     // Functions
@@ -51,8 +56,11 @@
         }
     }
 
-    function buildData(age, r_factor, country, places) {
+    function buildData(age, r_factor, state, country, places) {
         var relevant_results = age_sorted_contacts[getAgeBucket(age)]
+
+        var test_results = TEST_DATA.filter(x => x["state"] == state)[0];
+        console.log(test_results);
 
         let trueFalseFunc = function(v) {
             if (v == "True") {
@@ -100,7 +108,12 @@
             }
         }
 
-        return {
+        // Compute the chance
+        var chance = Math.floor(test_results["positive"]/test_results["totalTestResults"] * 10000) / 100.0;
+
+        return [
+        chance, 
+        {
             labels: Object.keys(ret),
             datasets: [
             {
@@ -108,16 +121,17 @@
                 values: Object.values(ret) 
             }
             ]
-        };
+        }];
     }
 
     // Parameters
     var age = 25;
     var r_factor = 1.0;
     var country = "UK";
+    var state = "CA";
     var places = PLACES.slice();
 
-    $: data = buildData(age, r_factor, country, places);
+    $: data = buildData(age, r_factor, state, country, places);
 
 </script>
 
@@ -127,16 +141,14 @@
     <label>What is your age?</label>
     <input bind:value={age} />
 
-    <!-- 
     <label>What state do you live in?</label>
-    <select bind:value={iso} >
-        {#each }
-
+    <select bind:value={state} >
+        {#each TEST_DATA as t}
+            <option value={t["state"]}>{t["state"]}</option>
         {/each}
     </select>
-    -->
 
-    <label>What do you think the R-factor is in your area?</label>
+    <label>What do you think the R-factor is in your state?</label>
     <input bind:value={r_factor} type="number" />
 
     <label>What country do you think most closely reflects contact patterns in your area?</label>
@@ -156,4 +168,6 @@
     {/each}
 </form>
 
-<Chart data={data} type="percentage" />
+<h2>Your chance of getting infected: {data[0]}%</h2>
+
+<Chart data={data[1]} type="percentage" />

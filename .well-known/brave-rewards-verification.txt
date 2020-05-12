@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: paulkass.github.io
+Token: f22a39370db4b570461288f88b679f1d23df393e08f8cc2d367f73f8db7e281a

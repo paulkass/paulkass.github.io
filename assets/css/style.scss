@@ -278,9 +278,35 @@ p {
   margin: 0 0 1.1rem;
 }
 
-/* ─── lede: first paragraph after h1 ─────────────────────── */
+/* ─── hero block (identity readout around H1) ─────────────── */
 
-h1 + p {
+.hero {
+  margin: 0 0 2rem;
+}
+
+.hero h1 {
+  margin: 0.4rem 0 0.4rem;
+}
+
+.ident-prefix,
+.ident-suffix {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.78rem;
+  color: var(--magenta);
+  letter-spacing: 0.18em;
+  text-shadow: 0 0 6px var(--glow-magenta);
+}
+
+.ident-suffix {
+  color: var(--dim);
+  text-shadow: 0 0 5px rgba(255, 46, 154, 0.18);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+}
+
+/* ─── lede: first paragraph after the hero block ─────────── */
+
+.hero + p {
   position: relative;
   font-size: 1.08rem;
   line-height: 1.65;
@@ -299,7 +325,7 @@ h1 + p {
     inset 0 0 0 1px rgba(0, 255, 245, 0.12);
 }
 
-h1 + p::before {
+.hero + p::before {
   content: '>>';
   position: absolute;
   left: -0.85rem;

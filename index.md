@@ -3,7 +3,13 @@ layout: default
 title: Paul Kassianik
 ---
 
+<div class="hero" markdown="1">
+<div class="ident-prefix">// SYS::IDENT 0xPK</div>
+
 # Paul Kassianik
+
+<div class="ident-suffix">// STATUS::ONLINE &nbsp;·&nbsp; LOC::SAN_FRANCISCO &nbsp;·&nbsp; UTC-08:00</div>
+</div>
 
 **Principal AI Security Researcher** / **AI Security Lead**, *Foundation AI*
 *(Cisco)*. Based in *San Francisco*. **Building AI systems for cybersecurity**.
@@ -49,8 +55,9 @@ library.
   — Kassianik, Saglam, Chen, Nelson, Vellore, et al. arXiv preprint
   [arXiv:2504.21039](https://arxiv.org/abs/2504.21039), 2025.
 - **Merlion: End-to-End Machine Learning for Time Series** — Bhatnagar,
-  Kassianik, Liu, Lan, Yang, Cassius, Sahoo, et al. Journal of Machine Learning
-  Research, 24(226), 2023.
+  Kassianik, Liu, Lan, Yang, Cassius, Sahoo, et al. [Journal of Machine
+  Learning Research, 24(226)](https://www.jmlr.org/papers/v24/22-0809.html),
+  2023 / [arXiv:2109.09265](https://arxiv.org/abs/2109.09265).
 - **Adversarial Reasoning at Jailbreaking Time** — Sabbaghi, Kassianik, Pappas,
   Singer, Karbasi, Hassani. ICML 2025 /
   [arXiv:2502.01633](https://arxiv.org/abs/2502.01633).
@@ -65,7 +72,7 @@ library.
   [arXiv:2409.12367](https://arxiv.org/abs/2409.12367), 2024.
 - **Capability-Based Scaling Laws for LLM Red-Teaming** — Panfilov, Kassianik,
   Andriushchenko, Geiping. ICML 2025 Workshop on Reliable and Responsible
-  Foundation Models.
+  Foundation Models / [arXiv:2505.20162](https://arxiv.org/abs/2505.20162).
 - **Llama-3.1-FoundationAI-SecurityLLM-Reasoning-8B Technical Report** — Yang,
   Li, He, Priyanshu, Saglam, Kassianik, et al. arXiv preprint
   [arXiv:2601.21051](https://arxiv.org/abs/2601.21051), 2026.

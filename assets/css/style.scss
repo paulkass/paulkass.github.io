@@ -576,6 +576,58 @@ blockquote {
   }
 }
 
+/* ─── periodic glitch ────────────────────────────────────── */
+
+@keyframes glitch-band {
+  0%, 99.0%, 100%   { opacity: 0;   top: -12vh; }
+  99.1%             { opacity: 0;   top: 12vh;  }
+  99.3%             { opacity: 0.7; top: 32vh;  }
+  99.55%            { opacity: 0.6; top: 55vh;  }
+  99.85%            { opacity: 0;   top: 88vh;  }
+}
+
+@keyframes glitch-chroma {
+  0%, 99.0%, 100% {
+    text-shadow:
+      -2px 0 var(--magenta),
+      2px 0 rgba(0, 255, 245, 0.55),
+      0 0 18px var(--glow-cyan),
+      0 0 36px rgba(0, 255, 245, 0.22);
+  }
+  99.2%, 99.8% {
+    text-shadow:
+      -4px 0 var(--magenta),
+      4px 0 rgba(0, 255, 245, 0.75),
+      0 0 22px var(--glow-cyan),
+      0 0 40px rgba(0, 255, 245, 0.30);
+  }
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: -12vh;
+  height: 12px;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 255, 245, 0.45) 0,
+    rgba(0, 255, 245, 0.45) 1px,
+    rgba(255, 46, 154, 0.18) 1px,
+    rgba(255, 46, 154, 0.18) 2px
+  );
+  box-shadow: 0 0 14px var(--glow-cyan);
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0;
+  animation: glitch-band 60s linear -59.3s infinite;
+}
+
+h1 {
+  animation: glitch-chroma 60s linear -59.3s infinite;
+}
+
 /* ─── reduced motion ─────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {

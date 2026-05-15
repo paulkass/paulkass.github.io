@@ -35,7 +35,7 @@ Leads pretraining, data, and evaluation for the Foundation-Sec model family
 (base, instruct, reasoning). Architects AI-Firewall research and production
 guardrails.
 
-**Robust Intelligence** *(2023 – 2024)*
+**Robust Intelligence** *(2023 – 2024, acquired by Cisco)*
 Principal Researcher. Built synthetic jailbreak frameworks that integrated new
 attack vectors into products within 72 hours; improved prompt-injection
 detection rates by ~20%.

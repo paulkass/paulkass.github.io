@@ -5,20 +5,21 @@ title: Paul Kassianik
 
 # Paul Kassianik
 
-Principal AI Security Researcher / AI Security Lead, Foundation AI (Cisco).
-Based in San Francisco. Working on securing large language models — pretraining
-security-focused foundation models, automated red-teaming, and production
-guardrails.
+**Principal AI Security Researcher** / **AI Security Lead**, *Foundation AI*
+*(Cisco)*. Based in *San Francisco*. **Building AI systems for cybersecurity**.
 
 ## About
 
-B.A. in Applied Mathematics (Computer Science focus), University of California,
-Berkeley.
+**Now:** leading research and pretraining for the **Foundation-Sec model
+family** at *Cisco* — open-weight LLMs purpose-built for security operations
+(base, instruct, reasoning).
 
-Current focus: large-scale pretraining for security-specialized LLMs, automated
-jailbreak discovery, and AI safety in cybersecurity. Led research and technical
-direction on Foundation-Sec-8B, Cisco Foundation AI's first open-weight security
-model.
+**Recent:** **automated red-teaming** (*Tree of Attacks*, NeurIPS '24),
+**prompt-injection defenses**, and **risk evaluation** of frontier reasoning
+models.
+
+**Earlier:** **code-generation LLMs** and **industrial time-series ML**
+(*Merlion*) at *Salesforce Research*.
 
 ## Experience
 
@@ -103,6 +104,11 @@ Related Cisco Foundation AI announcements:
 - [Foundation-sec-8b: Cisco Foundation AI's First Open-Source Security Model](https://blogs.cisco.com/security/foundation-sec-cisco-foundation-ai-first-open-source-security-model)
 - [Foundation-sec-8B-Instruct: An Out-of-the-Box Security Copilot](https://blogs.cisco.com/security/foundation-sec-8b-instruct-out-of-the-box-security-copilot)
 - [Foundation-sec-8b-reasoning: World's First Security Reasoning Model](https://blogs.cisco.com/security/foundation-sec-8b-reasoning-worlds-first-security-reasoning-model)
+
+## Education
+
+**B.A. Applied Mathematics**, *University of California, Berkeley* —
+Computer Science focus.
 
 ## Links
 

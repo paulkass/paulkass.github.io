@@ -23,7 +23,20 @@ html {
 
 body {
   margin: 0;
-  background: var(--bg);
+  background:
+    /* vignette: darken edges to focus the column */
+    radial-gradient(
+      ellipse 110% 90% at 50% 50%,
+      transparent 30%,
+      rgba(0, 0, 0, 0.6) 100%
+    ),
+    /* cyan dot grid */
+    radial-gradient(
+      rgba(0, 255, 245, 0.055) 1px,
+      transparent 1.6px
+    ) 0 0 / 28px 28px,
+    var(--bg);
+  background-attachment: fixed, fixed, fixed;
   color: var(--text);
   font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 0.95rem;
@@ -39,8 +52,8 @@ body::before {
   inset: 0;
   background: repeating-linear-gradient(
     0deg,
-    rgba(0, 255, 245, 0.035) 0,
-    rgba(0, 255, 245, 0.035) 1px,
+    rgba(0, 255, 245, 0.06) 0,
+    rgba(0, 255, 245, 0.06) 1px,
     transparent 1px,
     transparent 3px
   );
@@ -108,6 +121,7 @@ main {
   max-width: 820px;
   margin: 0 auto;
   padding: 3rem 1.5rem 5rem;
+  counter-reset: section;
 }
 
 /* ─── headings ───────────────────────────────────────────── */
@@ -119,10 +133,15 @@ h1, h2, h3, h4 {
 }
 
 h1 {
-  font-size: 2.6rem;
+  font-size: 3rem;
   letter-spacing: 0.04em;
   color: var(--cyan);
-  text-shadow: 0 0 14px var(--glow-cyan);
+  /* chromatic aberration: magenta ghost left, cyan ghost right, halo */
+  text-shadow:
+    -2px 0 var(--magenta),
+    2px 0 rgba(0, 255, 245, 0.55),
+    0 0 18px var(--glow-cyan),
+    0 0 36px rgba(0, 255, 245, 0.22);
   margin: 0 0 2rem;
 }
 
@@ -144,15 +163,36 @@ h2 {
   letter-spacing: 0.16em;
   color: var(--cyan);
   margin: 3.5rem 0 1.25rem;
-  padding-top: 1.25rem;
-  border-top: 1px solid var(--border);
+  padding-top: 1.5rem;
   text-shadow: 0 0 8px var(--glow-cyan);
+  counter-increment: section;
+  position: relative;
 }
 
 h2::before {
-  content: '// ';
+  content: counter(section, decimal-leading-zero) ' // ';
   color: var(--magenta);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.88em;
+  letter-spacing: 0.08em;
+  margin-right: 0.15em;
   text-shadow: 0 0 6px var(--glow-magenta);
+}
+
+h2::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--cyan) 0 8px,
+    transparent 8px 16px
+  );
+  opacity: 0.5;
+  box-shadow: 0 0 6px var(--glow-cyan);
 }
 
 h3 {
@@ -170,14 +210,66 @@ p {
   margin: 0 0 1.1rem;
 }
 
-strong {
-  color: var(--text);
+/* ─── lede: first paragraph after h1 ─────────────────────── */
+
+h1 + p {
+  position: relative;
+  font-size: 1.08rem;
+  line-height: 1.65;
+  color: #f5f6fb;
+  margin: 0 0 3rem;
+  padding: 1rem 1.25rem 1rem 1.5rem;
+  border-left: 2px solid var(--cyan);
+  background: linear-gradient(
+    90deg,
+    rgba(0, 255, 245, 0.08),
+    rgba(0, 255, 245, 0.02) 45%,
+    transparent 80%
+  );
+  box-shadow:
+    -10px 0 22px -6px var(--glow-cyan),
+    inset 0 0 0 1px rgba(0, 255, 245, 0.12);
+}
+
+h1 + p::before {
+  content: '>>';
+  position: absolute;
+  left: -0.85rem;
+  top: 0.95rem;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--magenta);
+  background: var(--bg);
+  padding: 0 0.25rem;
+  text-shadow: 0 0 8px var(--glow-magenta);
+  letter-spacing: 0.05em;
+}
+
+/* About section — quieter sibling of the lede treatment */
+h2#about + p,
+h2#about + p + p,
+h2#about + p + p + p {
+  border-left: 1px solid var(--cyan);
+  padding-left: 1rem;
+  margin-left: -1rem;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 255, 245, 0.04),
+    transparent 40%
+  );
+}
+
+strong {
+  color: var(--cyan);
+  font-weight: 700;
+  text-shadow: 0 0 6px var(--glow-cyan);
 }
 
 em {
-  color: var(--dim);
+  color: var(--magenta);
   font-style: italic;
+  text-shadow: 0 0 4px var(--glow-magenta);
 }
 
 hr {
@@ -192,6 +284,7 @@ a {
   color: var(--magenta);
   text-decoration: none;
   border-bottom: 1px solid transparent;
+  text-shadow: 0 0 6px rgba(255, 46, 154, 0.28);
   transition: color 150ms ease, border-color 150ms ease, text-shadow 150ms ease;
 }
 
@@ -229,7 +322,8 @@ ul > li::before {
   position: absolute;
   left: -1.25rem;
   top: 0;
-  text-shadow: 0 0 6px var(--glow-cyan);
+  font-size: 1.15em;
+  text-shadow: 0 0 10px var(--glow-cyan), 0 0 18px rgba(0, 255, 245, 0.4);
 }
 
 li {

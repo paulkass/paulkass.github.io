@@ -40,37 +40,37 @@ library.
 
 ## Selected publications
 
-- **Llama-3.1-FoundationAI-SecurityLLM-Reasoning-8B Technical Report** — Yang,
-  Li, He, Priyanshu, Saglam, Kassianik, et al. arXiv preprint
-  [arXiv:2601.21051](https://arxiv.org/abs/2601.21051), 2026.
-- **A Framework for Rapidly Developing and Deploying Protection Against Large
-  Language Model Attacks** — Swanda, Chang, Chen, Burch, Kassianik, Berlin.
-  CAMLIS 2025 / [arXiv:2509.20639](https://arxiv.org/abs/2509.20639).
+- <span class="featured-tag">[FEATURED]</span> **Tree of Attacks: Jailbreaking Black-Box LLMs Automatically** — Mehrotra,
+  Zampetakis, Kassianik, Nelson, Anderson, Singer, Karbasi.
+  [NeurIPS 2024](https://proceedings.neurips.cc/paper_files/paper/2024/hash/70702e8cbb4890b4a467b984ae59828a-Abstract-Conference.html)
+  / [arXiv:2312.02119](https://arxiv.org/abs/2312.02119).
+- <span class="featured-tag">[FEATURED]</span> **Llama-3.1-FoundationAI-SecurityLLM-Base-8B Technical Report** (lead author)
+  — Kassianik, Saglam, Chen, Nelson, Vellore, et al. arXiv preprint
+  [arXiv:2504.21039](https://arxiv.org/abs/2504.21039), 2025.
+- **Merlion: End-to-End Machine Learning for Time Series** — Bhatnagar,
+  Kassianik, Liu, Lan, Yang, Cassius, Sahoo, et al. Journal of Machine Learning
+  Research, 24(226), 2023.
+- **Adversarial Reasoning at Jailbreaking Time** — Sabbaghi, Kassianik, Pappas,
+  Singer, Karbasi, Hassani. ICML 2025 /
+  [arXiv:2502.01633](https://arxiv.org/abs/2502.01633).
 - **Llama-3.1-FoundationAI-SecurityLLM-8B-Instruct Technical Report** —
   Weerawardhena, Kassianik, Nelson, Saglam, Vellore, et al. arXiv preprint
   [arXiv:2508.01059](https://arxiv.org/abs/2508.01059), 2025.
 - **Large Language Models Encode Semantics in Low-Dimensional Linear Subspaces**
   — Saglam, Kassianik, Nelson, Weerawardhena, Singer, Karbasi. IJCNLP-AACL 2025
   / [arXiv:2507.09709](https://arxiv.org/abs/2507.09709).
-- **Capability-Based Scaling Laws for LLM Red-Teaming** — Panfilov, Kassianik,
-  Andriushchenko, Geiping. ICML 2025 Workshop on Reliable and Responsible
-  Foundation Models.
-- **Llama-3.1-FoundationAI-SecurityLLM-Base-8B Technical Report** (lead author)
-  — Kassianik, Saglam, Chen, Nelson, Vellore, et al. arXiv preprint
-  [arXiv:2504.21039](https://arxiv.org/abs/2504.21039), 2025.
-- **Adversarial Reasoning at Jailbreaking Time** — Sabbaghi, Kassianik, Pappas,
-  Singer, Karbasi, Hassani. ICML 2025 /
-  [arXiv:2502.01633](https://arxiv.org/abs/2502.01633).
 - **Extracting Memorized Training Data via Decomposition** — Su, Vellore, Chang,
   Mura, Nelson, Kassianik, Karbasi. arXiv preprint
   [arXiv:2409.12367](https://arxiv.org/abs/2409.12367), 2024.
-- **Tree of Attacks: Jailbreaking Black-Box LLMs Automatically** — Mehrotra,
-  Zampetakis, Kassianik, Nelson, Anderson, Singer, Karbasi.
-  [NeurIPS 2024](https://proceedings.neurips.cc/paper_files/paper/2024/hash/70702e8cbb4890b4a467b984ae59828a-Abstract-Conference.html)
-  / [arXiv:2312.02119](https://arxiv.org/abs/2312.02119).
-- **Merlion: End-to-End Machine Learning for Time Series** — Bhatnagar,
-  Kassianik, Liu, Lan, Yang, Cassius, Sahoo, et al. Journal of Machine Learning
-  Research, 24(226), 2023.
+- **Capability-Based Scaling Laws for LLM Red-Teaming** — Panfilov, Kassianik,
+  Andriushchenko, Geiping. ICML 2025 Workshop on Reliable and Responsible
+  Foundation Models.
+- **Llama-3.1-FoundationAI-SecurityLLM-Reasoning-8B Technical Report** — Yang,
+  Li, He, Priyanshu, Saglam, Kassianik, et al. arXiv preprint
+  [arXiv:2601.21051](https://arxiv.org/abs/2601.21051), 2026.
+- **A Framework for Rapidly Developing and Deploying Protection Against Large
+  Language Model Attacks** — Swanda, Chang, Chen, Burch, Kassianik, Berlin.
+  CAMLIS 2025 / [arXiv:2509.20639](https://arxiv.org/abs/2509.20639).
 
 See [Google Scholar](https://scholar.google.com/citations?user=qQCpQQwAAAAJ&hl=en)
 for the full, up-to-date list and current citation counts.

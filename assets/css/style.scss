@@ -240,6 +240,63 @@ li > ul {
   margin-top: 0.3rem;
 }
 
+/* ─── featured tag (inline pill) ─────────────────────────── */
+
+.featured-tag {
+  background: var(--magenta);
+  color: var(--bg);
+  font-family: 'Rajdhani', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  padding: 0.12em 0.6em 0.1em;
+  margin-right: 0.55em;
+  display: inline-block;
+  vertical-align: 0.12em;
+  white-space: nowrap;
+  border-radius: 2px;
+  box-shadow:
+    0 0 12px var(--glow-magenta),
+    0 0 24px rgba(255, 46, 154, 0.25);
+  text-shadow: none;
+}
+
+/* Parent <li> treatment for featured rows. :has() is supported in
+   all evergreen browsers (Chrome 105+, Safari 15.4+, Firefox 121+).
+   In older browsers the .featured-tag itself still marks the row. */
+
+ul > li:has(.featured-tag) {
+  position: relative;
+  border-left: 3px solid var(--magenta);
+  padding: 0.65rem 0.85rem 0.65rem 0.95rem;
+  margin: 0.5rem 0 0.5rem -0.95rem;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 46, 154, 0.12),
+      rgba(255, 46, 154, 0.04) 60%,
+      transparent
+    ),
+    var(--surface);
+  box-shadow:
+    -10px 0 18px -6px var(--glow-magenta),
+    inset 0 0 0 1px rgba(255, 46, 154, 0.15);
+  border-radius: 0 2px 2px 0;
+}
+
+ul > li:has(.featured-tag)::before {
+  display: none;  /* hide the cyan ▸ on featured rows */
+}
+
+ul > li:has(.featured-tag) + li:has(.featured-tag) {
+  margin-top: 0.4rem;
+}
+
+ul > li:has(.featured-tag) strong {
+  color: var(--text);
+  text-shadow: 0 0 6px var(--glow-cyan);
+}
+
 /* ─── code ───────────────────────────────────────────────── */
 
 code {

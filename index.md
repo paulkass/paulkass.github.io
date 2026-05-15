@@ -102,15 +102,9 @@ for the full, up-to-date list and current citation counts.
 
 Author at the [Cisco Security Blog](https://blogs.cisco.com/author/paulkass):
 
-- [Accelerate Security Operations with Cisco's New Security-Tuned Model](https://blogs.cisco.com/security/accelerate-security-operations-with-ciscos-new-security-tuned-model) — February 2026
 - <span class="featured-tag">[FEATURED]</span> [Evaluating Security Risk in DeepSeek and Other Frontier Reasoning Models](https://blogs.cisco.com/security/evaluating-security-risk-in-deepseek-and-other-frontier-reasoning-models) — January 2025
+- [Accelerate Security Operations with Cisco's New Security-Tuned Model](https://blogs.cisco.com/security/accelerate-security-operations-with-ciscos-new-security-tuned-model) — February 2026
 - [Using AI to Automatically Jailbreak GPT-4 and Other LLMs in Under a Minute](https://blogs.cisco.com/ai/using-ai-to-automatically-jailbreak-gpt-4-and-other-llms-in-under-a-minute) — December 2023
-
-Related Cisco Foundation AI announcements:
-
-- [Foundation-sec-8b: Cisco Foundation AI's First Open-Source Security Model](https://blogs.cisco.com/security/foundation-sec-cisco-foundation-ai-first-open-source-security-model)
-- [Foundation-sec-8B-Instruct: An Out-of-the-Box Security Copilot](https://blogs.cisco.com/security/foundation-sec-8b-instruct-out-of-the-box-security-copilot)
-- [Foundation-sec-8b-reasoning: World's First Security Reasoning Model](https://blogs.cisco.com/security/foundation-sec-8b-reasoning-worlds-first-security-reasoning-model)
 
 ## Education
 

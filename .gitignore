@@ -1,0 +1,9 @@
+# Jekyll build output
+_site/
+
+# Local preview environment (not part of the published site;
+# Gemfile is intentionally not committed — see CLAUDE.md)
+Gemfile
+Gemfile.lock
+.bundle/
+vendor/

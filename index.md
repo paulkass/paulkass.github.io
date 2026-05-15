@@ -110,8 +110,3 @@ Related Cisco Foundation AI announcements:
 **B.A. Applied Mathematics**, *University of California, Berkeley* —
 Computer Science focus.
 
-## Links
-
-- [LinkedIn](https://www.linkedin.com/in/paul-kassianik/)
-- [GitHub — @paulkass](https://github.com/paulkass)
-- [Google Scholar](https://scholar.google.com/citations?user=qQCpQQwAAAAJ&hl=en)

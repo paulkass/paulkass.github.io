@@ -71,9 +71,6 @@ library.
 - **Merlion: End-to-End Machine Learning for Time Series** — Bhatnagar,
   Kassianik, Liu, Lan, Yang, Cassius, Sahoo, et al. Journal of Machine Learning
   Research, 24(226), 2023.
-- **BigIssue: A Realistic Bug Localization Benchmark** — Kassianik, Nijkamp,
-  Pang, Zhou, Xiong. arXiv preprint
-  [arXiv:2207.10739](https://arxiv.org/abs/2207.10739), 2022.
 
 See [Google Scholar](https://scholar.google.com/citations?user=qQCpQQwAAAAJ&hl=en)
 for the full, up-to-date list and current citation counts.

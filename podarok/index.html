@@ -8,6 +8,10 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📦</text></svg>">
 <meta property="og:title" content="Посылка для тебя 📦">
 <meta property="og:description" content="Открой — там кое-что, что поднимет тебе настроение.">
+<meta property="og:image" content="https://paulkass.github.io/podarok/preview.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#232c47">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -174,7 +178,14 @@ body{
   content:"";position:absolute;top:0;bottom:0;left:calc(50% - 6px);width:12px;
   background:repeating-linear-gradient(45deg,var(--red) 0 6px,#fff 6px 12px);
 }
-.wrapping .gift-emoji{font-size:2.2rem;filter:drop-shadow(0 2px 2px rgba(0,0,0,.2))}
+.wrapping .gift-emoji{font-size:2.2rem;filter:drop-shadow(0 2px 2px rgba(0,0,0,.2));position:relative}
+.wrapping .gift-label{
+  position:relative;
+  background:var(--cream);
+  padding:2px 14px;border-radius:3px;
+  transform:rotate(-2deg);
+  box-shadow:0 2px 6px rgba(0,0,0,.18);
+}
 .wrapping:hover{transform:scale(1.03)}
 .wrapping:focus-visible{outline:3px solid var(--gold);outline-offset:-4px}
 .gift.opened .wrapping{opacity:0;transform:scale(1.25) rotate(4deg);pointer-events:none}
@@ -544,7 +555,7 @@ body{
 
     <!-- tea -->
     <div class="gift">
-      <button class="wrapping"><span class="gift-emoji">☕</span>подарок №1</button>
+      <button class="wrapping"><span class="gift-emoji">☕</span><span class="gift-label">подарок №1</span></button>
       <div class="card" id="teaCard">
         <h2>Чашка английского чая</h2>
         <p>Средство №1 от любых огорчений. Проверено веками.</p>
@@ -563,7 +574,7 @@ body{
 
     <!-- three lions -->
     <div class="gift">
-      <button class="wrapping"><span class="gift-emoji">🦁</span>подарок №2</button>
+      <button class="wrapping"><span class="gift-emoji">🦁</span><span class="gift-label">подарок №2</span></button>
       <div class="card">
         <h2>Три льва</h2>
         <p id="lionIntro">Им тоже грустно после матча. Погладь каждого.</p>
@@ -578,7 +589,7 @@ body{
 
     <!-- football -->
     <div class="gift">
-      <button class="wrapping"><span class="gift-emoji">⚽</span>подарок №3</button>
+      <button class="wrapping"><span class="gift-emoji">⚽</span><span class="gift-label">подарок №3</span></button>
       <div class="card">
         <h2>Антистресс-мяч</h2>
         <p>Осталась пара эмоций? Нажимай на поле — забей за Англию!</p>
@@ -601,7 +612,7 @@ body{
 
     <!-- song -->
     <div class="gift">
-      <button class="wrapping"><span class="gift-emoji">🎵</span>подарок №4</button>
+      <button class="wrapping"><span class="gift-emoji">🎵</span><span class="gift-label">подарок №4</span></button>
       <div class="card">
         <h2>Песня для тебя</h2>
         <p>Она напоминает, что всё будет хорошо.</p>
@@ -674,6 +685,7 @@ document.querySelectorAll('.wrapping').forEach(function(w){
     if(opened===4){
       setTimeout(function(){
         $('envelopeBtn').classList.add('shown');
+        $('envelopeBtn').scrollIntoView({behavior:'smooth',block:'center'});
         burstConfetti(80);
       },800);
     }
@@ -686,10 +698,14 @@ $('envelopeBtn').addEventListener('click',function(){
   document.body.style.overflow='hidden';
   burstConfetti(70);
 });
-$('backBtn').addEventListener('click',function(){
+$('backBtn').addEventListener('click',closeFinale);
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape')closeFinale();
+});
+function closeFinale(){
   $('finale').classList.remove('shown');
   document.body.style.overflow='';
-});
+}
 
 /* tea */
 $('brewBtn').addEventListener('click',function(){
@@ -738,7 +754,7 @@ var clockEl=$('sbClock'),secs=87*60;
 setInterval(function(){
   secs++;
   var m=Math.floor(secs/60),s=String(secs%60).padStart(2,'0');
-  clockEl.textContent=m<90?m+':'+s:'90+'+(m-89);
+  clockEl.textContent=m<90?m+':'+s:'90+'+Math.min(m-89,9);
 },1000);
 function ballSize(){return 27}
 function place(){ball.style.transform='translate('+bx+'px,'+by+'px) rotate('+rot+'deg)'}

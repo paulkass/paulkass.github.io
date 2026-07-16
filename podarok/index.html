@@ -11,7 +11,7 @@
 <meta name="theme-color" content="#232c47">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Nunito:wght@400;600;800&display=swap&subset=cyrillic" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Nunito:wght@400;600;800&family=Oswald:wght@500;600&display=swap&subset=cyrillic" rel="stylesheet">
 <style>
 :root{
   --navy:#232c47;
@@ -203,7 +203,7 @@ body{
 .btn:focus-visible{outline:3px solid var(--navy);outline-offset:3px}
 
 /* ---------- tea ---------- */
-.tea-scene{position:relative;height:120px;display:flex;align-items:flex-end;justify-content:center}
+.tea-scene{position:relative;height:164px;width:100%;display:flex;align-items:flex-end;justify-content:center}
 .cup{
   position:relative;width:96px;height:66px;
   background:#fff;
@@ -219,10 +219,76 @@ body{
 }
 .tea-fill{
   position:absolute;left:0;right:0;bottom:0;height:0;
-  background:linear-gradient(180deg,#b06a2c,#8a4f1d);
-  transition:height 1.6s ease;
+  background:#cfe3ee;
 }
-.brewed .tea-fill{height:78%}
+.brewed .tea-fill{animation:fill-brew 4.4s ease forwards .8s}
+@keyframes fill-brew{
+  0%{height:0;background:#cfe3ee}
+  40%{height:78%;background:#cfe3ee}
+  70%{height:78%;background:#cfe3ee}
+  100%{height:78%;background:#8a4f1d}
+}
+/* kettle */
+.kettle{
+  position:absolute;left:calc(50% + 6px);top:6px;
+  width:64px;height:44px;
+  background:#fff;border:3px solid var(--navy);
+  border-radius:10px 10px 18px 18px;
+  opacity:0;transform-origin:15% 85%;
+}
+.brewed .kettle{animation:kettle-pour 3.4s ease forwards}
+@keyframes kettle-pour{
+  0%{opacity:0;transform:translate(36px,-18px) rotate(0)}
+  12%{opacity:1;transform:translate(0,0) rotate(0)}
+  26%{transform:translate(0,0) rotate(-26deg)}
+  74%{transform:translate(0,0) rotate(-26deg)}
+  88%{opacity:1;transform:translate(0,0) rotate(0)}
+  100%{opacity:0;transform:translate(36px,-18px) rotate(0)}
+}
+.k-spout{position:absolute;left:-17px;top:12px;width:18px;height:10px;background:#fff;border:3px solid var(--navy);border-radius:4px 0 0 4px;transform:rotate(14deg)}
+.k-handle{position:absolute;top:-17px;left:14px;width:30px;height:16px;border:3px solid var(--navy);border-bottom:none;border-radius:12px 12px 0 0}
+.k-lid{position:absolute;top:-8px;left:26px;width:10px;height:6px;background:var(--navy);border-radius:2px}
+/* water stream */
+.stream{
+  position:absolute;left:calc(50% - 14px);top:48px;
+  width:5px;height:48px;border-radius:4px;
+  background:linear-gradient(180deg,rgba(150,197,229,.9),rgba(150,197,229,.5));
+  opacity:0;transform:scaleY(0);transform-origin:top;
+}
+.brewed .stream{animation:stream-flow 1.9s linear forwards .75s}
+@keyframes stream-flow{
+  0%{opacity:0;transform:scaleY(0)}
+  10%{opacity:1;transform:scaleY(1)}
+  85%{opacity:1;transform:scaleY(1)}
+  100%{opacity:0;transform:scaleY(1)}
+}
+/* tea bag */
+.teabag{
+  position:absolute;left:calc(50% - 10px);top:14px;
+  width:20px;height:24px;
+  opacity:0;
+}
+.teabag::before{content:"";position:absolute;left:8px;top:-26px;width:2px;height:26px;background:var(--navy)}
+.teabag::after{content:"";position:absolute;left:4px;top:-34px;width:12px;height:9px;background:var(--red);border-radius:2px}
+.tb-bag{
+  display:block;width:100%;height:100%;box-sizing:border-box;
+  background:#f7f3e8;border:2px solid var(--navy);
+  border-radius:0 0 5px 5px;
+}
+.brewed .teabag{animation:teabag-dip 1.9s ease forwards 2.9s}
+@keyframes teabag-dip{
+  0%{opacity:0;transform:translateY(0)}
+  18%{opacity:1;transform:translateY(14px)}
+  55%{transform:translateY(90px)}
+  72%{transform:translateY(81px)}
+  88%{transform:translateY(90px)}
+  100%{opacity:1;transform:translateY(87px)}
+}
+/* underwater: soaked, tea-stained, softly blurred; string and tag above stay crisp */
+.brewed .tb-bag{animation:bag-soak 1.3s ease forwards 4.4s}
+@keyframes bag-soak{
+  to{filter:blur(1.3px);opacity:.72;background:#dcc296}
+}
 .saucer{
   position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);
   width:150px;height:12px;border-radius:50%;
@@ -237,9 +303,9 @@ body{
   opacity:0;
 }
 .brewed .steam span{animation:rise-steam 2.4s ease-in-out infinite}
-.steam span:nth-child(1){left:8px;animation-delay:0s}
-.steam span:nth-child(2){left:26px;animation-delay:.7s}
-.steam span:nth-child(3){left:44px;animation-delay:1.3s}
+.steam span:nth-child(1){left:8px;animation-delay:4.6s}
+.steam span:nth-child(2){left:26px;animation-delay:5.3s}
+.steam span:nth-child(3){left:44px;animation-delay:5.9s}
 @keyframes rise-steam{
   0%{opacity:0;transform:translateY(0) scaleY(.7)}
   35%{opacity:.8}
@@ -300,7 +366,46 @@ body{
   left:0;top:0;will-change:transform;
   user-select:none;pointer-events:none;
 }
-.score{font-weight:800;font-size:1rem}
+/* broadcast scorebug */
+.scorebug{
+  display:flex;align-items:center;
+  height:28px;
+  font-family:'Oswald',sans-serif;font-weight:600;font-size:.82rem;
+  white-space:nowrap;
+  color:#fff;
+  background:linear-gradient(180deg,#1d2742,#101623);
+  border-radius:4px;
+  box-shadow:0 2px 6px rgba(0,0,0,.4);
+  overflow:hidden;
+  letter-spacing:.03em;
+}
+.sb-live{
+  display:flex;align-items:center;gap:4px;
+  background:var(--red);
+  height:100%;padding:0 7px;
+  font-size:.68rem;
+}
+.sb-live::before{content:"";width:5px;height:5px;border-radius:50%;background:#fff;animation:blink 1.6s infinite}
+@keyframes blink{50%{opacity:.3}}
+.sb-team{display:flex;align-items:center;gap:5px;padding:0 8px}
+.sb-flag{width:17px;height:11px;border-radius:1px;box-shadow:0 0 0 1px rgba(255,255,255,.25)}
+.sb-flag.eng{
+  background:
+    linear-gradient(#c8102e,#c8102e) center/100% 3px no-repeat,
+    linear-gradient(#c8102e,#c8102e) center/3px 100% no-repeat,
+    #fff;
+}
+.sb-flag.arg{
+  background:
+    radial-gradient(circle 2px at center,#f6b40e 98%,transparent),
+    linear-gradient(180deg,#74acdf 33%,#fff 33%,#fff 67%,#74acdf 67%);
+}
+.sb-num{
+  background:#f2b950;color:#101623;
+  height:100%;display:flex;align-items:center;
+  padding:0 8px;font-size:.95rem;
+}
+.sb-clock{padding:0 8px;font-variant-numeric:tabular-nums;color:#f2b950}
 .goal-msg{
   font-family:'Caveat',cursive;font-size:1.5rem;color:var(--red);
   min-height:1.3em;font-weight:700;
@@ -357,20 +462,58 @@ body{
   to{transform:translateY(105vh) rotate(720deg)}
 }
 
-/* ---------- final note ---------- */
-.ps{
+/* ---------- envelope ---------- */
+.envelope-btn{
   display:none;
-  margin-top:44px;
-  background:var(--cream);color:var(--ink);
-  border-radius:6px;padding:22px 26px;
-  transform:rotate(1deg);
+  margin:44px auto 0;
+  font-family:'Caveat',cursive;font-size:1.5rem;font-weight:700;
+  color:var(--ink);
+  background:var(--cream);
+  border:none;border-radius:8px;
+  padding:14px 26px;cursor:pointer;
+  transform:rotate(-1deg);
   box-shadow:0 6px 24px rgba(0,0,0,.35);
-  opacity:0;
+  animation:bob 2s ease-in-out infinite;
 }
-.ps.shown{display:block;opacity:1;animation:ps-rise .7s ease}
-@keyframes ps-rise{from{opacity:0;transform:rotate(1deg) translateY(24px)}to{opacity:1;transform:rotate(1deg) translateY(0)}}
+.envelope-btn.shown{display:block}
+.envelope-btn:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+
+/* ---------- finale ---------- */
+.finale{
+  position:fixed;inset:0;z-index:80;
+  display:none;
+  flex-direction:column;align-items:center;justify-content:center;
+  gap:28px;padding:24px;
+  background:linear-gradient(180deg,var(--navy) 0%,var(--navy-deep) 100%);
+  overflow:hidden;
+}
+.finale.shown{display:flex;animation:finale-fade .8s ease}
+@keyframes finale-fade{from{opacity:0}to{opacity:1}}
+.finale-flag{
+  position:absolute;inset:-6%;
+  width:112%;height:112%;
+  pointer-events:none;
+}
+.ps{
+  position:relative;
+  max-width:520px;
+  background:var(--cream);color:var(--ink);
+  border-radius:6px;padding:24px 28px;
+  transform:rotate(1deg);
+  box-shadow:0 10px 34px rgba(0,0,0,.5);
+  animation:ps-rise .8s ease;
+}
+@keyframes ps-rise{from{opacity:0;transform:rotate(1deg) translateY(28px)}to{opacity:1;transform:rotate(1deg) translateY(0)}}
 .ps p{font-family:'Caveat',cursive;font-size:1.55rem;line-height:1.3}
 .ps .sign{text-align:right;margin-top:8px;color:var(--red)}
+.back-link{
+  position:relative;
+  font-family:'Caveat',cursive;font-size:1.25rem;
+  color:var(--gold);
+  background:none;border:none;cursor:pointer;
+  text-decoration:underline;
+}
+.back-link:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
@@ -408,6 +551,9 @@ body{
         <div class="tea-scene">
           <div class="saucer"></div>
           <div class="cup"><div class="tea-fill"></div></div>
+          <div class="kettle"><div class="k-spout"></div><div class="k-handle"></div><div class="k-lid"></div></div>
+          <div class="stream"></div>
+          <div class="teabag"><span class="tb-bag"></span></div>
           <div class="steam"><span></span><span></span><span></span></div>
         </div>
         <p class="msg" id="teaMsg"></p>
@@ -436,13 +582,19 @@ body{
       <div class="card">
         <h2>Антистресс-мяч</h2>
         <p>Осталась пара эмоций? Нажимай на поле — забей за Англию!</p>
+        <div class="scorebug">
+          <span class="sb-live">LIVE</span>
+          <span class="sb-team"><span class="sb-flag eng"></span>АНГ</span>
+          <span class="sb-num"><span id="score">0</span>&nbsp;–&nbsp;0</span>
+          <span class="sb-team">АРГ<span class="sb-flag arg"></span></span>
+          <span class="sb-clock" id="sbClock">87:00</span>
+        </div>
         <div class="pitch" id="pitch">
           <div class="line midline"></div>
           <div class="circle"></div>
           <div class="goal"></div>
           <div class="ball" id="ball">⚽</div>
         </div>
-        <p class="score">Голы за Англию: <span id="score">0</span></p>
         <p class="goal-msg" id="goalMsg"></p>
       </div>
     </div>
@@ -469,11 +621,29 @@ body{
 
   </div>
 
-  <div class="ps" id="ps">
-    <p>P.S. Одна игра — это просто одна игра. Львы ещё вернутся, а ты держись и улыбайся — у тебя это отлично получается&nbsp;🙂</p>
+  <button class="envelope-btn" id="envelopeBtn">Открой последний конверт&nbsp;💌</button>
+
+</div>
+
+<div class="finale" id="finale">
+  <svg class="finale-flag" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <filter id="wave" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.008 0.02" numOctaves="2" seed="3" result="noise">
+        <animate attributeName="baseFrequency" dur="10s" values="0.008 0.02;0.011 0.026;0.008 0.02" repeatCount="indefinite"/>
+      </feTurbulence>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="22"/>
+    </filter>
+    <g filter="url(#wave)">
+      <rect x="40" y="40" width="520" height="320" fill="#ffffff" fill-opacity=".13"/>
+      <rect x="40" y="176" width="520" height="48" fill="#e8354f" fill-opacity=".38"/>
+      <rect x="276" y="40" width="48" height="320" fill="#e8354f" fill-opacity=".38"/>
+    </g>
+  </svg>
+  <div class="ps">
+    <p>P.S. Одна игра — это просто одна игра. Три льва всегда возвращаются — и возвращаются сильнее. Так что держись и улыбайся: у тебя это отлично получается&nbsp;🙂</p>
     <p class="sign">— Паша</p>
   </div>
-
+  <button class="back-link" id="backBtn">← вернуться к подаркам</button>
 </div>
 
 <script>
@@ -503,18 +673,32 @@ document.querySelectorAll('.wrapping').forEach(function(w){
     opened++;
     if(opened===4){
       setTimeout(function(){
-        $('ps').classList.add('shown');
+        $('envelopeBtn').classList.add('shown');
         burstConfetti(80);
       },800);
     }
   });
 });
 
+/* finale */
+$('envelopeBtn').addEventListener('click',function(){
+  $('finale').classList.add('shown');
+  document.body.style.overflow='hidden';
+  burstConfetti(70);
+});
+$('backBtn').addEventListener('click',function(){
+  $('finale').classList.remove('shown');
+  document.body.style.overflow='';
+});
+
 /* tea */
 $('brewBtn').addEventListener('click',function(){
   $('teaCard').classList.add('brewed');
-  $('teaMsg').textContent='Готово! Осторожно, горячий ☕ Пей и ни о чём не переживай.';
+  $('teaMsg').textContent='Завариваем…';
   this.style.display='none';
+  setTimeout(function(){
+    $('teaMsg').textContent='Готово! Осторожно, горячий ☕ Пей и ни о чём не переживай.';
+  },4700);
 });
 
 /* three lions */
@@ -549,6 +733,13 @@ function spawnHeart(el){
 var pitch=$('pitch'),ball=$('ball'),scoreEl=$('score'),goalMsg=$('goalMsg');
 var score=0,bx=40,by=70,vx=0,vy=0,rot=0,raf=null;
 var msgs=['ГОООЛ! ⚽','Вот это удар!','Аргентина такого не видела!','Кейн бы гордился!','Ты просто снайпер!','Уэмбли аплодирует стоя! 👏'];
+/* match clock: England scores its winners in stoppage time */
+var clockEl=$('sbClock'),secs=87*60;
+setInterval(function(){
+  secs++;
+  var m=Math.floor(secs/60),s=String(secs%60).padStart(2,'0');
+  clockEl.textContent=m<90?m+':'+s:'90+'+(m-89);
+},1000);
 function ballSize(){return 27}
 function place(){ball.style.transform='translate('+bx+'px,'+by+'px) rotate('+rot+'deg)'}
 place();
